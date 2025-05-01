@@ -3,7 +3,7 @@ venv/
 env/
 .env
 DS_store/
-
+__pycache__/
 
 LabNotebooks
 scarecrow_dataset
