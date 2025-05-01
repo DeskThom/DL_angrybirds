@@ -1,3 +1,10 @@
+# OS files and such
+venv/
+env/
+.env
+DS_store/
+
+
 LabNotebooks
 scarecrow_dataset
 utils
