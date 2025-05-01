@@ -2,7 +2,7 @@
 venv/
 env/
 .env
-DS_store/
+DS_Store/
 __pycache__/
 
 LabNotebooks
