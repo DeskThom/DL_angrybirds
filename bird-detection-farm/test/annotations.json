@@ -1,0 +1,269 @@
+[
+    {
+        "NormalizedName": "33b652a7-0162-4bfe-b1c9-14c5bc8785a3",
+        "OriginalFileName": "test_extra_1.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 260,
+                        "Y": 269
+                    },
+                    {
+                        "X": 369.5,
+                        "Y": 269
+                    },
+                    {
+                        "X": 369.5,
+                        "Y": 475
+                    },
+                    {
+                        "X": 260,
+                        "Y": 475
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "NormalizedName": "bf2da614-16b2-4077-a749-5d831821d188",
+        "OriginalFileName": "test_extra_2.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 281,
+                        "Y": 186
+                    },
+                    {
+                        "X": 356.5,
+                        "Y": 186
+                    },
+                    {
+                        "X": 356.5,
+                        "Y": 320
+                    },
+                    {
+                        "X": 281,
+                        "Y": 320
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "NormalizedName": "51feaca3-087b-4457-99c7-486c1b585381",
+        "OriginalFileName": "test_extra_3.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 143,
+                        "Y": 173
+                    },
+                    {
+                        "X": 191.5,
+                        "Y": 173
+                    },
+                    {
+                        "X": 191.5,
+                        "Y": 303.5
+                    },
+                    {
+                        "X": 143,
+                        "Y": 303.5
+                    }
+                ]
+            },
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 234,
+                        "Y": 211
+                    },
+                    {
+                        "X": 292,
+                        "Y": 211
+                    },
+                    {
+                        "X": 292,
+                        "Y": 305.5
+                    },
+                    {
+                        "X": 234,
+                        "Y": 305.5
+                    }
+                ]
+            },
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 292,
+                        "Y": 181
+                    },
+                    {
+                        "X": 357,
+                        "Y": 181
+                    },
+                    {
+                        "X": 357,
+                        "Y": 289
+                    },
+                    {
+                        "X": 292,
+                        "Y": 289
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "NormalizedName": "9082821a-daed-4045-9e25-7001146473b1",
+        "OriginalFileName": "test_extra_4.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 197,
+                        "Y": 248
+                    },
+                    {
+                        "X": 280.5,
+                        "Y": 248
+                    },
+                    {
+                        "X": 280.5,
+                        "Y": 380.5
+                    },
+                    {
+                        "X": 197,
+                        "Y": 380.5
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "NormalizedName": "91000c3b-143e-4314-b1e2-a1738bbc91c6",
+        "OriginalFileName": "test_extra_5.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 301,
+                        "Y": 206
+                    },
+                    {
+                        "X": 521,
+                        "Y": 206
+                    },
+                    {
+                        "X": 521,
+                        "Y": 453
+                    },
+                    {
+                        "X": 301,
+                        "Y": 453
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "NormalizedName": "4fda434d-bb57-41fe-8a1e-b560ddb1823d",
+        "OriginalFileName": "test_extra_6.jpg",
+        "AnnotationData": [
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 136,
+                        "Y": 132
+                    },
+                    {
+                        "X": 217,
+                        "Y": 132
+                    },
+                    {
+                        "X": 217,
+                        "Y": 234.5
+                    },
+                    {
+                        "X": 136,
+                        "Y": 234.5
+                    }
+                ]
+            },
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 145,
+                        "Y": 166
+                    },
+                    {
+                        "X": 207.5,
+                        "Y": 166
+                    },
+                    {
+                        "X": 207.5,
+                        "Y": 237
+                    },
+                    {
+                        "X": 145,
+                        "Y": 237
+                    }
+                ]
+            },
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 255,
+                        "Y": 244
+                    },
+                    {
+                        "X": 325.5,
+                        "Y": 244
+                    },
+                    {
+                        "X": 325.5,
+                        "Y": 349.5
+                    },
+                    {
+                        "X": 255,
+                        "Y": 349.5
+                    }
+                ]
+            },
+            {
+                "Label": "Bird",
+                "Coordinates": [
+                    {
+                        "X": 396,
+                        "Y": 140
+                    },
+                    {
+                        "X": 449,
+                        "Y": 140
+                    },
+                    {
+                        "X": 449,
+                        "Y": 267.5
+                    },
+                    {
+                        "X": 396,
+                        "Y": 267.5
+                    }
+                ]
+            }
+        ]
+    }
+]
