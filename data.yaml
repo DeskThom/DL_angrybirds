@@ -1,6 +1,7 @@
-train: ./scarecrow_dataset/train/images
-val: ./scarecrow_dataset/val/images
-test: ./scarecrow_dataset/test/images
+path: DL_angrybirds/scarecrow_dataset  # dataset root dir
+train: train/images
+val: val/images
+test: test/images
 
 nc: 1  # Number of classes
 names: ['Bird']  # Class names
