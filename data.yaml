@@ -1,4 +1,4 @@
-path: DL_angrybirds/scarecrow_dataset  # dataset root dir
+path: C:/Users/thomz/Documents/JADS/Master/Deep Learning/DL_angrybirds/datasets/scarecrow_dataset  # dataset root dir
 train: train/images
 val: val/images
 test: test/images
