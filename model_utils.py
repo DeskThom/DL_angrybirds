@@ -8,18 +8,36 @@ class YOLOModel:
         # Load YOLO model - Pretrained
         self.model = YOLO(model_path).to(self.device)  # Load YOLO model
 
-    def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32):
+    def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, debug_mode=False):
         """
         Use YOLO's built-in training functionality with settings
         """
+        if debug_mode:
+            # Debug mode: Turn off all data augmentations
+            self.model.train(
+                data=data_yaml,  # Path to dataset YAML file
+                epochs=epochs,  # Number of epochs
+                imgsz=imgsz,  # Image size for training
+                batch=batch_size,  # Batch size
+                device=self.device,  # Device (CPU or CUDA)
+                hsv_h = 0,
+                hsv_s = 0,
+                hsv_v = 0,
+                translate = 0,
+                scale = 0,
+                fliplr = 0,
+                mosaic = 0,
+                erasing = 0
+            )
+        else:
         # Calling the model's train function directly
-        self.model.train(
-            data=data_yaml,  # Path to dataset YAML file
-            epochs=epochs,  # Number of epochs
-            imgsz=imgsz,  # Image size for training
-            batch=batch_size,  # Batch size
-            device=self.device  # Device (CPU or CUDA)
-        )
+            self.model.train(
+                data=data_yaml,  # Path to dataset YAML file
+                epochs=epochs,  # Number of epochs
+                imgsz=imgsz,  # Image size for training
+                batch=batch_size,  # Batch size
+                device=self.device  # Device (CPU or CUDA)
+            )
 
     def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
         """
