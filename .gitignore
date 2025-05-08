@@ -5,17 +5,19 @@ env/
 DS_Store/
 __pycache__/
 
-LabNotebooks
+# Data files
 scarecrow_dataset
-utils
-Assignment1.ipynb
 
-runs/
-
+# YAML files 
 data.yaml
 extra_data.yaml
 birdfarm.yaml
 
-
+# Checkpoints and logs
+runs/
 labels.cache
 
+# Sandboxes
+utils
+Assignment1.ipynb
+LabNotebooks

@@ -113,3 +113,15 @@ def generate_yaml(folder_name="scarecrow_dataset", yaml_filename="data.yaml"):
         print(f"YAML file written as {yaml_filename} with path: {dataset_base_path}")
     else:
         print(f"Dataset folder '{folder_name}' not found in {os.getcwd()}")
+
+# DELETE CACHE
+def delete_cache(cache_dir='datasets'):
+    """
+    Removes all the labels.cache files in a specified directory and its subdirectories.
+    """
+    for root, dirs, files in os.walk(cache_dir):
+        for file in files:
+            if file.endswith('.cache'):
+                os.remove(os.path.join(root, file))
+                print(f"Deleted cache file: {os.path.join(root, file)}")
+    print("✅ Cache files deleted.")

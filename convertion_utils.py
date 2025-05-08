@@ -4,7 +4,6 @@ from PIL import Image
 
 # The functions in this utils file are designed to convert the scarecrow dataset to both coco and yolo formats.
 # To convert the entire dataset, please use process_all_subdirs(root_dir) function.
-        
 
 def convert_to_coco(your_data, images_folder):
     coco = {

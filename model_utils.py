@@ -3,15 +3,20 @@ import torch
 
 # YOLO MODEL CLASS - V11 = BASE
 class YOLOModel:
-    def __init__(self, model_path='yolo11n.pt', device='cpu'):
+    def __init__(self, model_path='models/pretrained/yolo11n.pt', device='cpu'):
         self.device = device
         # Load YOLO model - Pretrained
         self.model = YOLO(model_path).to(self.device)  # Load YOLO model
 
     ### TRAIN, TEST, VAL ###
-    def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, debug_mode=False):
+    def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, cls = 0.5, iou=0.7, conf=0.25, debug_mode=False):
         """
-        Use YOLO's built-in training functionality with settings
+        Use YOLO's built-in training functionality with standard settings. The train function includes a validation step.
+        
+        Input:
+        - debug_mode = True: Turn off all data augmentations
+        - Takes a YAML file as input for the dataset
+        - epochs, imgsz, batch_size, cls, iou, conf - Adjustable hyperparameters and training settings (details: https://docs.ultralytics.com/modes/train/#train-settings)
         """
         if debug_mode:
             # Debug mode: Turn off all data augmentations
@@ -34,10 +39,28 @@ class YOLOModel:
         # Calling the model's train function directly
             self.model.train(
                 data=data_yaml,  # Path to dataset YAML file
+                device=self.device,  # Device (CPU or CUDA)
+                
+                # Training settings
                 epochs=epochs,  # Number of epochs
-                imgsz=imgsz,  # Image size for training
                 batch=batch_size,  # Batch size
-                device=self.device  # Device (CPU or CUDA)
+                
+                # Hyperparameters - Adjustable
+                imgsz=imgsz,  # Image size for training
+                cls=cls, # Class confidence threshold
+                iou=iou,
+                conf=conf,  # Confidence threshold for predictions
+                
+                # Standard data augmentations
+                fliplr = 0.5,
+                degrees = 90, # randomly rotates between -90 degrees and 90 degrees
+                perspective = 0.0005,
+                shear = 10,
+                hsv_h = 0.1,
+                hsv_v = 0.5,
+                hsv_s = 0.2,
+                scale = 0.5
+
             )
 
     def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):

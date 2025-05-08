@@ -1,7 +1,0 @@
-path: c:\Users\thomz\Documents\JADS\Master\Deep Learning\DL_angrybirds\datasets\bird-detection-farm
-train: train/images
-val: val/images
-test: test/images
-nc: 1
-names:
-- Bird
