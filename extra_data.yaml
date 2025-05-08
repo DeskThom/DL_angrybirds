@@ -1,7 +1,0 @@
-path: C:/Users/thomz/Documents/JADS/Master/Deep Learning/DL_angrybirds/datasets/bird-detection-farm  # dataset root dir
-train: train/images
-val: val/images
-test: test/images
-
-nc: 1  # Number of classes
-names: ['Bird']  # Class names
