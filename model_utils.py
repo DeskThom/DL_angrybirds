@@ -66,6 +66,18 @@ class YOLOModel:
         )
         
     #### TOOLING ####
+    
+    def predict(self, image_path, conf=0.25):
+        # Single prediction
+        results = self.model.predict(
+            source=image_path,  # Path to image or video file
+            conf=conf,  # Confidence threshold for predictions
+            device=self.device,  # Device (CPU or CUDA)
+            save=True,  # Save the predictions
+            save_txt=True,  # Save the predictions in YOLO format
+            save_conf=True,  # Save confidence scores
+            show=True  # Show the predictions on the image
+        )
 
     def save(self, save_path='best_model.pt'):
         """
