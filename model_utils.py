@@ -1,13 +1,14 @@
 from ultralytics import YOLO
 import torch
 
-
+# YOLO MODEL CLASS - V11 = BASE
 class YOLOModel:
     def __init__(self, model_path='yolo11n.pt', device='cpu'):
         self.device = device
         # Load YOLO model - Pretrained
         self.model = YOLO(model_path).to(self.device)  # Load YOLO model
 
+    ### TRAIN, TEST, VAL ###
     def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, debug_mode=False):
         """
         Use YOLO's built-in training functionality with settings
@@ -66,7 +67,6 @@ class YOLOModel:
         )
         
     #### TOOLING ####
-    
     def predict(self, image_path, conf=0.25):
         # Single prediction
         results = self.model.predict(

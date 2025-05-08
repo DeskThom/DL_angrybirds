@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import yaml
 
+# VISAL CHECK OF ANNOTATIONS
 def visualize_yolo_annotations(image_path, label_path, class_names=None):
     # Load the image
     image = Image.open(image_path).convert("RGB")
@@ -52,8 +53,7 @@ def visualize_yolo_annotations(image_path, label_path, class_names=None):
 
     ax.axis('off')
     plt.tight_layout()
-    plt.show(block=True)  # <- ensures the window stays open
-    
+    plt.show()  # <- ensures the window stays open
     
 # GENERATE YAML
 def find_dataset_folder(folder_name="scarecrow_dataset"):
