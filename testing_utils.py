@@ -59,6 +59,8 @@ def visualize_yolo_annotations(image_path, label_path, class_names=None):
 def find_dataset_folder(folder_name="scarecrow_dataset"):
     """
     Finds the dataset folder in the current working directory or its subdirectories and returns it
+    
+    Input: folder_name (str): The name of the data folder to search for.
     """
     # Get the current working directory
     current_working_dir = os.getcwd()
@@ -85,6 +87,10 @@ def find_dataset_folder(folder_name="scarecrow_dataset"):
 def generate_yaml(folder_name="scarecrow_dataset", yaml_filename="data.yaml"):
     """
     Automatically generates a YAML file for using the YOLO model 
+    
+    Input: 
+    - folder_name (str): The name of the data folder to search for. 
+    - yaml_filename (str): The name of the YAML file to be created.
     """
     # Find the folder path
     dataset_base_path = find_dataset_folder(folder_name)
