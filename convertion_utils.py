@@ -66,10 +66,6 @@ def convert_to_coco_from_path(file_path):
 
     print(f'✅ Converted to COCO format and saved as {output_file}')
 
-# Example usage:
-# main('path/to/annotations.json')
-
-
 def coco_to_yolo(coco_json_path, output_dir):
     # Load COCO JSON
     with open(coco_json_path, 'r') as f:

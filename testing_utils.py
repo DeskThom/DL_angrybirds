@@ -3,6 +3,7 @@ import os
 from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import yaml
 
 def visualize_yolo_annotations(image_path, label_path, class_names=None):
     # Load the image
@@ -52,3 +53,57 @@ def visualize_yolo_annotations(image_path, label_path, class_names=None):
     ax.axis('off')
     plt.tight_layout()
     plt.show(block=True)  # <- ensures the window stays open
+    
+    
+# GENERATE YAML
+def find_dataset_folder(folder_name="scarecrow_dataset"):
+    """
+    Finds the dataset folder in the current working directory or its subdirectories and returns it
+    """
+    # Get the current working directory
+    current_working_dir = os.getcwd()
+    print(f"Current working directory: {current_working_dir}")
+    
+    # Check if the folder exists in the current working directory
+    possible_path = os.path.join(current_working_dir, folder_name)
+    if os.path.isdir(possible_path):
+        print(f"Found '{folder_name}' in the current directory: {possible_path}")
+        return possible_path  # If the folder is found, return the path
+    
+    # If not found in the current working directory, start walking through the directory tree
+    print(f"'{folder_name}' not found in the current working directory. Searching...")
+    for root, dirs, files in os.walk(current_working_dir):
+        if folder_name in dirs:
+            found_path = os.path.join(root, folder_name)
+            print(f"Found '{folder_name}' at: {found_path}")
+            return found_path  # Return the full path if found
+    
+    # If folder isn't found
+    print(f"'{folder_name}' not found after searching the entire directory.")
+    return None  # Return None if the folder is not found
+
+def generate_yaml(folder_name="scarecrow_dataset", yaml_filename="data.yaml"):
+    """
+    Automatically generates a YAML file for using the YOLO model 
+    """
+    # Find the folder path
+    dataset_base_path = find_dataset_folder(folder_name)
+
+    if dataset_base_path:
+        # Create the dictionary for the YAML file with the correct structure
+        data = {
+            'path': dataset_base_path,  # dataset root dir
+            'train': 'train/images',
+            'val': 'val/images',
+            'test': 'test/images',
+            'nc': 1,  # Number of classes
+            'names': ['Bird']  # Class names
+        }
+
+        # Write the data to a YAML file with the proper structure
+        with open(yaml_filename, 'w') as file:
+            yaml.dump(data, file, default_flow_style=False, allow_unicode=True, sort_keys=False, indent = 2)
+
+        print(f"YAML file written as {yaml_filename} with path: {dataset_base_path}")
+    else:
+        print(f"Dataset folder '{folder_name}' not found in {os.getcwd()}")
