@@ -21,14 +21,14 @@ class YOLOModel:
                 imgsz=imgsz,  # Image size for training
                 batch=batch_size,  # Batch size
                 device=self.device,  # Device (CPU or CUDA)
-                hsv_h = 0,
-                hsv_s = 0,
-                hsv_v = 0,
-                translate = 0,
-                scale = 0,
-                fliplr = 0,
-                mosaic = 0,
-                erasing = 0
+                fliplr = 0.5,
+                degrees = 90, # randomly rotates between -90 degrees and 90 degrees
+                perspective = 0.0005,
+                shear = 10,
+                hsv_h = 0.1,
+                hsv_v = 0.5,
+                hsv_s = 0.2,
+                scale = 0.5
             )
         else:
         # Calling the model's train function directly
