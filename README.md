@@ -6,3 +6,4 @@ Our project aims to create an accurate and fast solution for the challenge at ha
 
 **IMPORTANT**
 - Change the path to the data in the data.yaml file. It requires a full path to the data folder.
+- Next to installing the requirements, you need to manually run 'python -m pip install albumentations==1.0.3' in the terminal.
