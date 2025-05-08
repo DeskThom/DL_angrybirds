@@ -3,14 +3,14 @@ import torch
 
 
 class YOLOModel:
-    def __init__(self, model_path='yolov8n.pt', device='cpu'):
+    def __init__(self, model_path='yolo11n.pt', device='cpu'):
         self.device = device
-        # Load YOLO model
+        # Load YOLO model - Pretrained
         self.model = YOLO(model_path).to(self.device)  # Load YOLO model
 
     def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32):
         """
-        Use YOLO's built-in training functionality
+        Use YOLO's built-in training functionality with settings
         """
         # Calling the model's train function directly
         self.model.train(
@@ -21,41 +21,33 @@ class YOLOModel:
             device=self.device  # Device (CPU or CUDA)
         )
 
-    def validate(self, val_loader):
+    def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
         """
-        Custom validation loop (if needed)
+        Use YOLO's built-in testing functionality with settings
         """
-        self.model.eval()
-        val_loss = 0.0
-
-        with torch.no_grad():
-            for images, labels in val_loader:
-                images, labels = images.to(self.device), labels.to(self.device)
-                loss = self.model(images, labels)
-                val_loss += loss.item()
-
-        return val_loss / len(val_loader)
-
-    def test(self, test_loader):
+        # Calling the model's test function directly
+        self.model.val(
+            data=data_yaml,  # Path to dataset YAML file
+            imgsz=imgsz,  # Image size for testing
+            batch=batch_size,  # Batch size
+            device=self.device,  # Device (CPU or CUDA)
+            split='test'  # Split for testing (train, val, test)
+        )
+        
+    def val(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
         """
-        Custom testing loop (if needed)
+        Use YOLO's built-in testing functionality with settings
         """
-        self.model.eval()
-        correct = 0
-        total = 0
-
-        with torch.no_grad():
-            for images, labels in test_loader:
-                images, labels = images.to(self.device), labels.to(self.device)
-                outputs = self.model(images)
-                predictions = outputs[0]  # Get predictions
-                _, predicted = torch.max(predictions, 1)  # Get the class with the max score
-                total += labels.size(0)
-                correct += (predicted == labels).sum().item()
-
-        accuracy = correct / total
-        print(f'Test Accuracy: {accuracy:.4f}')
-        return accuracy
+        # Calling the model's test function directly
+        self.model.val(
+            data=data_yaml,  # Path to dataset YAML file
+            imgsz=imgsz,  # Image size for testing
+            batch=batch_size,  # Batch size
+            device=self.device,  # Device (CPU or CUDA)
+            split='val'  # Split for testing (train, val, test)
+        )
+        
+    #### TOOLING ####
 
     def save(self, save_path='best_model.pt'):
         """
@@ -68,3 +60,12 @@ class YOLOModel:
         Load pre-trained model weights
         """
         self.model = YOLO(model_path).to(self.device)
+        
+    def set_system(self, device='cpu'):
+        """
+        Set the system device (CPU or CUDA)
+        cpu: 'cpu'
+        gpu: 0
+        """
+        self.device = device
+        self.model.to(self.device)
