@@ -3,3 +3,6 @@ Specifically, with this project we are aiming to make a contribution to the curr
 One especially difficult challenge in this field is to detecting sitting birds.
 
 Our project aims to create an accurate and fast solution for the challenge at hand. 
+
+**IMPORTANT**
+- Change the path to the data in the data.yaml file. It requires a full path to the data folder.
