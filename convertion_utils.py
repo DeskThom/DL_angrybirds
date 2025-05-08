@@ -4,7 +4,6 @@ from PIL import Image
 
 # The functions in this utils file are designed to convert the scarecrow dataset to both coco and yolo formats.
 # To convert the entire dataset, please use process_all_subdirs(root_dir) function.
-        
 
 def convert_to_coco(your_data, images_folder):
     coco = {
@@ -48,7 +47,7 @@ def convert_to_coco(your_data, images_folder):
     return coco
 
 # Note: Currently WIP and not working
-def convert_to_coco_from_path(file_path):
+def convert_to_coco_from_path(file_path, images_folder):
     # Get directory of the file
     folder = os.path.dirname(file_path)
     output_file = os.path.join(folder, 'coco_annotations.json')
@@ -65,10 +64,6 @@ def convert_to_coco_from_path(file_path):
         json.dump(coco_data, f, indent=4)
 
     print(f'✅ Converted to COCO format and saved as {output_file}')
-
-# Example usage:
-# main('path/to/annotations.json')
-
 
 def coco_to_yolo(coco_json_path, output_dir):
     # Load COCO JSON
