@@ -47,7 +47,7 @@ def convert_to_coco(your_data, images_folder):
 
     return coco
 
-
+# Note: Currently WIP and not working
 def convert_to_coco_from_path(file_path):
     # Get directory of the file
     folder = os.path.dirname(file_path)
