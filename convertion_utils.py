@@ -6,7 +6,7 @@ from PIL import Image
 # To convert the entire dataset, please use process_all_subdirs(root_dir) function.
         
 
-def convert_to_coco(your_data):
+def convert_to_coco(your_data, images_folder):
     coco = {
         "images": [],
         "annotations": [],
@@ -16,11 +16,17 @@ def convert_to_coco(your_data):
 
     for img_id, item in enumerate(your_data, start=1):
         filename = item["OriginalFileName"]
+        img_path = os.path.join(images_folder, filename)
+        
+        # Read image size
+        with Image.open(img_path) as img:
+            width, height = img.size
+
         coco["images"].append({
             "id": img_id,
             "file_name": filename,
-            "width": 640,   # Adjust if known
-            "height": 480   # Adjust if known
+            "width": width,
+            "height": height
         })
 
         for ann in item["AnnotationData"]:
@@ -52,7 +58,7 @@ def convert_to_coco_from_path(file_path):
         your_data = json.load(f)
 
     # Convert to COCO format
-    coco_data = convert_to_coco(your_data)
+    coco_data = convert_to_coco(your_data, images_folder)
 
     # Save coco_annotations.json in the same folder
     with open(output_file, 'w') as f:
@@ -117,7 +123,12 @@ def process_all_subdirs(root_dir):
         with open(ann_path, 'r') as f:
             data = json.load(f)
         
-        coco_data = convert_to_coco(data)
+        image_path = os.path.join(split_dir, 'images')
+        if not os.path.exists(image_path):
+            print(f"❌ No images folder found in {split_dir}, skipping...")
+            continue
+        
+        coco_data = convert_to_coco(data, image_path)
         coco_out_path = os.path.join(split_dir, 'coco_annotations.json')
         with open(coco_out_path, 'w') as f:
             json.dump(coco_data, f, indent=4)
