@@ -1,6 +1,8 @@
 import os
 import cv2
 import torch
+import random
+import numpy as np
 from detectron2.utils.logger import setup_logger
 from detectron2 import model_zoo
 from detectron2.config import get_cfg
@@ -13,7 +15,14 @@ from detectron2.utils.visualizer import Visualizer
 setup_logger()
 
 class DetectronModel:
-    def __init__(self):
+    def __init__(self, seed=42):
+
+        # Set reproducibility seed
+        self.seed = seed
+        torch.manual_seed(seed)
+        random.seed(seed)
+        np.random.seed(seed)
+
         # Print environment info
         print("✅ PyTorch version:", torch.__version__)
         print("✅ CUDA available:", torch.cuda.is_available())
@@ -28,7 +37,13 @@ class DetectronModel:
         os.makedirs(self.output_dir, exist_ok=True)
 
     def build_train_cfg(self):
+        
         cfg = get_cfg()  # Create a new default config object
+        cfg.SEED = self.seed
+        torch.manual_seed(self.seed)
+        random.seed(self.seed)
+        np.random.seed(self.seed)
+
         cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
         # Load base config for Faster R-CNN with ResNet-50 and FPN from the model zoo
 
@@ -75,7 +90,13 @@ class DetectronModel:
 
     def build_eval_cfg(self):
         # Load the same config used for training
-        cfg = get_cfg()
+
+        cfg = get_cfg() 
+        cfg.SEED = self.seed
+        torch.manual_seed(self.seed)
+        random.seed(self.seed)
+        np.random.seed(self.seed)
+
         cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
         cfg.DATASETS.TEST = ("scarecrow_val",)  # Your validation dataset
         cfg.MODEL.WEIGHTS = os.path.join(self.output_dir, "model_final.pth")  # Load the trained model
@@ -92,6 +113,13 @@ class DetectronModel:
 
     def build_predict_cfg(self):
         # Load configuration
+
+        cfg = get_cfg() 
+        cfg.SEED = self.seed
+        torch.manual_seed(self.seed)
+        random.seed(self.seed)
+        np.random.seed(self.seed)
+        
         cfg = get_cfg()
         cfg.merge_from_file("detectron2/configs/COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
         cfg.MODEL.WEIGHTS = "output/model_final.pth"  
