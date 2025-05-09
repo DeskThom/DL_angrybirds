@@ -1,5 +1,6 @@
 from ultralytics import YOLO
-import torch
+import yaml, json
+
 
 # YOLO MODEL CLASS - V11 = BASE
 class YOLOModel:
@@ -63,6 +64,72 @@ class YOLOModel:
 
             )
 
+    def grid_search(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, param_grid=None, result_file='grid_search_results.json'):
+        """
+        Perform grid search over hyperparameters using the existing train() function.
+
+        Args:
+            data_yaml (str): Path to YAML dataset config.
+            epochs (int): Number of epochs.
+            imgsz (int): Image size.
+            batch_size (int): Batch size.
+            debug_mode (bool): If True, disables augmentation.
+            param_grid (dict): Dictionary of hyperparameters to search. Example:
+                {
+                    'lr0': [0.01, 0.001],
+                    'momentum': [0.9, 0.937],
+                    'weight_decay': [0.0005, 0.001]
+                }
+                
+        Note/improvements:
+        - The current function does NOT allow the user to turn off the automatic optimizer/lr/weight_decay/momentum settings.
+        """
+        from itertools import product
+
+        if param_grid is None:
+            print("No parameter grid provided. Using default values.")
+            with open('param_grid.json', 'r') as f:
+                param_grid = yaml.safe_load(f)
+
+        # Generate all combinations
+        keys, values = zip(*param_grid.items())
+        combinations = [dict(zip(keys, v)) for v in product(*values)]
+
+        print(f"Running grid search over {len(combinations)} combinations...")
+    
+        # Store performance metrics for each combination
+        results = []
+
+        for i, params in enumerate(combinations):
+            print(f"\n➡ Running combination {i + 1}/{len(combinations)}: {params}")
+
+            # Call existing train method with extra hyperparameters
+            metrics = self.model.train(
+                data=data_yaml,
+                epochs=epochs,
+                imgsz=imgsz,
+                batch=batch_size,
+                device=self.device,
+                **params                  # Unpack hyperparameters from the dictionary
+            )
+
+        
+        # Example: Save mAP and other metrics
+        result = {
+            "params": params,
+            "mAP_50": metrics.box.map50,
+            "mAP_50_95": metrics.box.map,
+            "loss": metrics.loss 
+        }
+        results.append(result)
+        # Save results to a JSON file for later analysis
+        with open(result_file, 'w') as f:
+            json.dump(results, f, indent=4)
+
+        print("\n✅ Grid search complete.")
+
+
+# TEST/VAL PLACEHOLDERS - VALDIDATION IS DONE DURING TRAINING
     def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
         """
         Use YOLO's built-in testing functionality with settings

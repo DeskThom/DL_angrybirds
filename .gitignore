@@ -12,6 +12,8 @@ scarecrow_dataset
 data.yaml
 extra_data.yaml
 birdfarm.yaml
+bird.yaml
+scarecrow.yaml
 
 # Checkpoints and logs
 runs/

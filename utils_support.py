@@ -91,6 +91,8 @@ def generate_yaml(folder_name="scarecrow_dataset", yaml_filename="data.yaml"):
     Input: 
     - folder_name (str): The name of the data folder to search for. 
     - yaml_filename (str): The name of the YAML file to be created.
+    
+    Personal note (DeskThom): I LOVE this function for some reason
     """
     # Find the folder path
     dataset_base_path = find_dataset_folder(folder_name)
