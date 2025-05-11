@@ -85,6 +85,7 @@ class YOLOModel:
                 "params": params,
                 "mAP_50": metrics.box.map50,
                 "mAP_50_95": metrics.box.map,
+                "recall": metrics.box.recall       
             }
             results.append(result)
             # Free up memory
@@ -98,7 +99,7 @@ class YOLOModel:
 
         print("\n✅ Grid search complete.")
 
-    def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
+    def test(self, data_yaml='data.yaml', imgsz=896, batch_size=16):
         self.model.val(
             data=data_yaml,
             imgsz=imgsz,
@@ -107,7 +108,7 @@ class YOLOModel:
             split='test'
         )
 
-    def val(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
+    def val(self, data_yaml='scarecow.yaml', imgsz=896, batch_size=16):
         self.model.val(
             data=data_yaml,
             imgsz=imgsz,
