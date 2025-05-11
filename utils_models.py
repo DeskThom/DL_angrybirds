@@ -1,7 +1,8 @@
 from ultralytics import YOLO
 import yaml, json
 import os, shutil
-
+import torch
+import gc
 # YOLO MODEL CLASS - V11 = BASE
 class YOLOModel:
     def __init__(self, model_path='models/pretrained/yolo11n.pt', device='cpu'):
@@ -86,6 +87,11 @@ class YOLOModel:
                 "mAP_50_95": metrics.box.map,
             }
             results.append(result)
+            # Free up memory
+            del metrics
+            torch.cuda.empty_cache()
+            gc.collect()
+                    
 
         with open(result_file, 'w') as f:
             json.dump(results, f, indent=4)

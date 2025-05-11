@@ -101,7 +101,7 @@ class YOLOModel:
             split='test'
         )
 
-    def val(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
+    def val(self, data_yaml='bird.yaml', imgsz=640, batch_size=32):
         self.model.val(
             data=data_yaml,
             imgsz=imgsz,
