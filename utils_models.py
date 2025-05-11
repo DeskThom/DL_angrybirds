@@ -12,6 +12,7 @@ class YOLOModel:
     def train(self, data_yaml='data.yaml', epochs=50, imgsz=640, batch_size=32, cls=0.5, iou=0.7, conf=0.25, debug_mode=False, seed=42):
         if debug_mode:
             self.model.train(
+                seed=seed,
                 data=data_yaml,
                 epochs=epochs,
                 imgsz=imgsz,
@@ -28,6 +29,7 @@ class YOLOModel:
             )
         else:
             self.model.train(
+                seed=seed,
                 data=data_yaml,
                 device=self.device,
                 epochs=epochs,
@@ -57,7 +59,6 @@ class YOLOModel:
         print(f"\n🚀 Phase 2: Fine-tuning on {originaldata_yaml} using weights from Phase 1")
         self.load(model_path=intermediate_weights)
         self.train(data_yaml=originaldata_yaml, debug_mode=debug_mode, **kwargs)
-
 
     def grid_search(self, data_yaml='data.yaml', epochs=50, param_grid=None, result_file='grid_search_results.json', seed=42):
         from itertools import product
@@ -92,24 +93,6 @@ class YOLOModel:
 
         print("\n✅ Grid search complete.")
 
-    def test(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
-        self.model.val(
-            data=data_yaml,
-            imgsz=imgsz,
-            batch=batch_size,
-            device=self.device,
-            split='test'
-        )
-
-    def val(self, data_yaml='data.yaml', imgsz=640, batch_size=32):
-        self.model.val(
-            data=data_yaml,
-            imgsz=imgsz,
-            batch=batch_size,
-            device=self.device,
-            split='val'
-        )
-
     def predict(self, image_path, conf=0.25):
         results = self.model.predict(
             source=image_path,
@@ -120,6 +103,7 @@ class YOLOModel:
             save_conf=True,
             show=True
         )
+        return results
 
     def save(self, save_path='best_model.pt'):
         best_path = 'runs/detect/train/weights/best.pt'
