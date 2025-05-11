@@ -53,12 +53,12 @@ class YOLOModel:
         Transfer training: Train on one dataset, save best weights, then fine-tune on another dataset.
         """
         print(f"\n🔁 Phase 1: Training on {additionaldata_yaml}")
-        self.train(data_yaml=additionaldata_yaml, debug_mode=debug_mode, **kwargs)
+        self.train(data_yaml=additionaldata_yaml, debug_mode=debug_mode, seed=seed,**kwargs)
         self.save(save_path=intermediate_weights)
 
         print(f"\n🚀 Phase 2: Fine-tuning on {originaldata_yaml} using weights from Phase 1")
         self.load(model_path=intermediate_weights)
-        self.train(data_yaml=originaldata_yaml, debug_mode=debug_mode, **kwargs)
+        self.train(data_yaml=originaldata_yaml, debug_mode=debug_mode, seed=seed, **kwargs)
 
     def grid_search(self, data_yaml='data.yaml', epochs=50, param_grid=None, result_file='grid_search_results.json', seed=42):
         from itertools import product
