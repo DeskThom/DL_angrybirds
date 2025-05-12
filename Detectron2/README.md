@@ -30,16 +30,18 @@ pip install -U 'git+https://github.com/facebookresearch/detectron2.git'
 install requirements.txt
 
 Project structure:
-project/
-├── test.ipynb                    # Main notebook
-├── scarecrow_coco_dataset/
+Detectron2/
+├── test.ipynb                 # Main training and evaluation notebook
+├── utils_detectron.py        # Utility functions for dataset and model handling
+├── requirements.txt          # Python dependencies
+├── scarecrow_coco_dataset/   # COCO-style dataset
 │   ├── train/
 │   │   ├── _annotations.coco.json
 │   │   └── images/
 │   ├── valid/
 │   │   ├── _annotations.coco.json
 │   │   └── images/
-└── output/                       # Will be created to store model checkpoints
+└── output/                   # Directory for model outputs and checkpoints
 
 Running the Notebook
 
