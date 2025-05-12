@@ -5,6 +5,50 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import yaml
 
+# SPLITTING DATASET
+def split(base_dir = "datasets/scarecrow_dataset",splits = ["train", "val", "test"]):
+    """
+    Function for splitting a image dataset with annotations into train, val and test folders.
+    """
+    
+    for split in splits:
+        print(f"\nProcessing {split} split...")
+
+        image_dir = os.path.join(base_dir, split, "images")
+        annotation_path = os.path.join(base_dir, split, "annotations.json")
+
+        # Load annotations
+        with open(annotation_path, "r") as f:
+            annotations = json.load(f)
+
+        print(f"Found {len(annotations)} annotation entries in annotations.json")
+
+        # Loop through annotations and rename corresponding images
+        for idx, annotation in enumerate(annotations, 1):
+            old_name = annotation["OriginalFileName"]
+            ext = os.path.splitext(old_name)[1].lower()  # Preserve the file extension
+            new_name = f"{split}_original_{idx}{ext}"
+
+            old_path = os.path.join(image_dir, old_name)
+            new_path = os.path.join(image_dir, new_name)
+
+            # Check if the image file exists before renaming
+            if os.path.exists(old_path):
+                os.rename(old_path, new_path)
+                print(f"Renamed {old_name} to {new_name}")
+            else:
+                print(f"WARNING: Image file {old_name} not found in {image_dir}")
+                continue
+
+            # Update the annotation with the new image name
+            annotation["OriginalFileName"] = new_name
+
+        # Save updated annotations
+        with open(annotation_path, "w") as f:
+            json.dump(annotations, f, indent=4)
+
+        print(f"{split} renamed and annotations updated.")
+
 # VISAL CHECK OF ANNOTATIONS
 def visualize_yolo_annotations(image_path, label_path, class_names=None):
     # Load the image
