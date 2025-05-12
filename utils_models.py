@@ -85,8 +85,7 @@ class YOLOModel:
             result = {
                 "params": params,
                 "mAP_50": metrics.box.map50,
-                "mAP_50_95": metrics.box.map,
-                "recall": metrics.box.recall       
+                "mAP_50_95": metrics.box.map,      
             }
             results.append(result)
             # Free up memory
